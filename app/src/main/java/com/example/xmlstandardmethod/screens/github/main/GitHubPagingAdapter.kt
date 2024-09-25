@@ -14,6 +14,7 @@ class GitHubPagingAdapter: PagingDataAdapter<GitHubRepo, GitHubViewHolder>(GitHu
         val repo = getItem(position)
         if (repo != null) {
             holder.bind(repo)
+
         }
     }
 
