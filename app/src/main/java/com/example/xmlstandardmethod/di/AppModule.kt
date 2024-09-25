@@ -1,6 +1,8 @@
 package com.example.xmlstandardmethod.di
 
 import com.example.xmlstandardmethod.Constants.BASE_URL
+import com.example.xmlstandardmethod.Constants.GITHUB_URL
+import com.example.xmlstandardmethod.network.GitHubApiService
 import com.example.xmlstandardmethod.network.StandardApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -15,6 +17,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun providesGitHubApiService(): GitHubApiService {
+        val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+        return Retrofit.Builder()
+            .baseUrl(GITHUB_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(GitHubApiService::class.java)
+    }
+
 
     @Provides
     @Singleton

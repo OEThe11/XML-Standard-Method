@@ -101,7 +101,12 @@ dependencies {
     // RecyclerView
     implementation(libs.recyclerView)
 
+    //Paging
+    implementation(libs.androidx.paging)
 
+    //Glide
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
     //Testing
     testImplementation(libs.junit)
