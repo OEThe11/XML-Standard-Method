@@ -1,5 +1,6 @@
 package com.example.xmlstandardmethod.network
 
+import com.example.xmlstandardmethod.models.network.GitHubResponse
 import com.example.xmlstandardmethod.network.Endpoints.GITHUB_ENDPOINT
 import retrofit2.Response
 import retrofit2.http.GET

@@ -1,7 +1,11 @@
 package com.example.xmlstandardmethod.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.xmlstandardmethod.Constants.BASE_URL
 import com.example.xmlstandardmethod.Constants.GITHUB_URL
+import com.example.xmlstandardmethod.database.GitHubDatabase
+import com.example.xmlstandardmethod.database.GitHubRepoDao
 import com.example.xmlstandardmethod.network.GitHubApiService
 import com.example.xmlstandardmethod.network.StandardApi
 import com.squareup.moshi.Moshi
@@ -17,6 +21,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+
+    @Provides
+    @Singleton
+    fun provideDatabase(appContext: Context): GitHubDatabase {
+        return Room.databaseBuilder(appContext, GitHubDatabase::class.java, "github_db").build()
+    }
+
+    @Provides
+    fun provideGitHubRepoDao(database: GitHubDatabase): GitHubRepoDao {
+        return database.gitHubRepoDao()
+    }
 
     @Provides
     @Singleton

@@ -1,4 +1,4 @@
-package com.example.xmlstandardmethod.network
+package com.example.xmlstandardmethod.models.network
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

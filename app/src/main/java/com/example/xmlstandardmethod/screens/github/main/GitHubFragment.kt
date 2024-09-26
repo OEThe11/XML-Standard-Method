@@ -9,8 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.xmlstandardmethod.databinding.FragmentGithubBinding
+import com.example.xmlstandardmethod.models.entity.GitHubRepoEntity
+import com.example.xmlstandardmethod.models.network.GitHubRepo
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -21,36 +25,42 @@ class GitHubFragment : Fragment() {
     private lateinit var adapter: GitHubPagingAdapter
     private lateinit var binding: FragmentGithubBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentGithubBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set up the RecyclerView and adapter
         adapter = GitHubPagingAdapter()
-
-        // Set the LayoutManager for RecyclerView
+        binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        // Set the adapter
-        binding.recyclerView.adapter = adapter
-
-        // Collect the paginated data and submit it to the adapter
+        // Collect paginated data from the API and cache it
         lifecycleScope.launchWhenStarted {
-            viewModel.searchResults.collectLatest { pagingData ->
+            viewModel.paginatedData.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
+
+                // Convert PagingData<GitHubRepo> to List<GitHubRepo> and pass to cacheRepositories
+                val repoList = pagingData.collectData() // Collects and extracts data from PagingData
+
+                // Cache the API data
+                viewModel.cacheRepositories(repoList)
             }
         }
 
-        // Add LoadStateListener to show or hide the ProgressBar
-        adapter.addLoadStateListener { loadState ->
-            binding.progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+        // Collect cached data from Room and display it when available
+        lifecycleScope.launchWhenStarted {
+            viewModel.cachedRepositories.collect { repos ->
+                if (repos.isNotEmpty()) {
+                    // Handle displaying cached data
+                }
+            }
         }
+    }
+
+    // Helper function to convert PagingData into List
+    private suspend fun PagingData<GitHubRepo>.collectData(): List<GitHubRepo> {
+        val repoList = mutableListOf<GitHubRepo>()
+        this.map { repo ->
+            repoList.add(repo)
+        }
+        return repoList
     }
 }

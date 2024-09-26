@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.daggerHilt)
-    id ("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.kapt)
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -108,6 +108,16 @@ dependencies {
     implementation(libs.glide)
     kapt(libs.glide.compiler)
 
+    //Room
+    implementation(libs.room)
+    kapt(libs.room.compiler)
+    implementation(libs.room.coroutines)
+
+    implementation(libs.kotlin.coroutines.core)
+    implementation(libs.kotlin.coroutines.android)
+
+
+
     //Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -118,4 +128,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+}
+
+kapt {
+    correctErrorTypes = true  // This ensures kapt doesn't fail on generic error types
 }

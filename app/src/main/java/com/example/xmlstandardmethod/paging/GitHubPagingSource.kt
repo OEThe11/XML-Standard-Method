@@ -3,8 +3,7 @@ package com.example.xmlstandardmethod.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.xmlstandardmethod.network.GitHubApiService
-import com.example.xmlstandardmethod.network.GitHubRepo
-import retrofit2.http.Query
+import com.example.xmlstandardmethod.models.network.GitHubRepo
 
 class GitHubPagingSource(
     private val apiService: GitHubApiService,

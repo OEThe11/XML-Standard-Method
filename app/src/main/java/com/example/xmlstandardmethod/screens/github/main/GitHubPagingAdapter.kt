@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.xmlstandardmethod.databinding.ItemContainerBinding
-import com.example.xmlstandardmethod.network.GitHubRepo
+import com.example.xmlstandardmethod.models.network.GitHubRepo
 
 class GitHubPagingAdapter: PagingDataAdapter<GitHubRepo, GitHubViewHolder>(GitHubRepoDiffCallback()) {
     override fun onBindViewHolder(holder: GitHubViewHolder, position: Int) {

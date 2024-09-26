@@ -27,6 +27,8 @@ navigationUiKtx = "2.7.7"
 navigationFragmentVersion = "2.7.7"
 paging = "3.1.1"
 glide = "4.15.1"
+room = "2.5.0"
+coroutines = "1.5.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +50,9 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-paging = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging" }
+
+
+
 
 # Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
@@ -83,11 +88,21 @@ androidx-navigation-fragment = { group = "androidx.navigation", name = "navigati
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide"}
 
+# Room
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-coroutines = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+kotlin-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlin-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kapt = { id = "kotlin-kapt", version.ref = "kotlin" }
 #For Dagger Hilt
 daggerHilt = { id = "com.google.dagger.hilt.android", version = "2.50" }
 safeArgs = { id = "androidx.navigation.safeargs", version.ref = "args"}
+
+
 
