@@ -101,6 +101,9 @@ dependencies {
     // RecyclerView
     implementation(libs.recyclerView)
 
+    //Venmo
+    implementation(libs.venmo)
+
 
 
     //Testing

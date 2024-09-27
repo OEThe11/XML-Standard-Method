@@ -1,7 +1,9 @@
 package com.example.xmlstandardmethod.di
 
 import com.example.xmlstandardmethod.Constants.BASE_URL
+import com.example.xmlstandardmethod.Constants.VENMO_URL
 import com.example.xmlstandardmethod.network.StandardApi
+import com.example.xmlstandardmethod.network.VenmoApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -15,6 +17,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun providesVenmoApi(): VenmoApi {
+        val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+        return Retrofit.Builder()
+            .baseUrl(VENMO_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+            .create(VenmoApi::class.java)
+    }
+
 
     @Provides
     @Singleton

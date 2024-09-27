@@ -2,24 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
-
+    app:startDestination="@id/paymentFragment">
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.xmlstandardmethod.screens.main.MainFragment"
-        android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment">
-            <argument
-                android:name="itemId"
-                app:argType="integer" />
-        </action>
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.xmlstandardmethod.screens.details.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:id="@+id/paymentFragment"
+        android:name="com.example.xmlstandardmethod.screens.venmo.payment.PaymentFragment"
+        android:label="PaymentFragment" />
 </navigation>
